@@ -11,7 +11,7 @@ public class SceneAndURLLoader : MonoBehaviour
     }
     public void SceneLoad(string sceneName)
     {
-        m_PauseMenu.MenuOff();
+        //m_PauseMenu.MenuOff();
         if (sceneName == "current")
         {
             Application.LoadLevel(Application.loadedLevelName);
