@@ -3,9 +3,9 @@ using System.Collections;
 
 public class Control : MonoBehaviour {
     public string playerNum = "";
-    public float moveSpeed = 5.0f;
-    public float jumpPower = 20f;
-    public float fastFall = 10f;
+    public float moveSpeed = 20f;
+    public float jumpPower = 35f;
+    public float fastFall = 30f;
     public bool jumping = false;
     bool facingRight = true;
 
@@ -19,6 +19,9 @@ public class Control : MonoBehaviour {
         anim.SetBool("Ground", true);
         anim.SetFloat("Speed", 0f);
         anim.SetBool("Crouch", false);
+
+        //ignore collision between players
+        Physics2D.IgnoreLayerCollision(8, 8);
     }
 
 	void FixedUpdate()
