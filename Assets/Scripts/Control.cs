@@ -74,8 +74,8 @@ public class Control : MonoBehaviour {
         }
         if (y > 0.5f /*&& jumping*/)
         {
-            rb.velocity = new Vector2(rb.velocity.x, -fastFall);
-            
+            //rb.velocity = new Vector2(rb.velocity.x, -fastFall);
+            rb.velocity += new Vector2(0, -2);
         }
         if (y < 0)
         {
