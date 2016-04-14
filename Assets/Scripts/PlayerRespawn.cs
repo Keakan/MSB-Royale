@@ -8,12 +8,15 @@ public class PlayerRespawn : MonoBehaviour {
     public int PlayerHealth;
     public int PlayerNumber;
 
+    public Image DeathDisplay;
     public Text HealthDisplay;
     public Text KillsDisplay;
     private float _elapsedTime = 0;
+
     private void Start()
     {
         Time.timeScale = 1;
+        DeathDisplay.transform.position = new Vector3(0, 100, 0);
     }
     private void Update()
     {
@@ -36,8 +39,10 @@ public class PlayerRespawn : MonoBehaviour {
         {
             Debug.Log(DeadMessage);
             Destroy(this.gameObject);
+            DeathDisplay.transform.position = KillsDisplay.transform.position;
             Destroy(HealthDisplay);
             Destroy(KillsDisplay);
+           
         }
     }
 
