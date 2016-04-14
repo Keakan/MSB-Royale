@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerRespawn : MonoBehaviour {
@@ -6,9 +7,18 @@ public class PlayerRespawn : MonoBehaviour {
     public GameObject RespawnPoint;
     public int PlayerHealth;
     public int PlayerNumber;
+
+    public Text HealthDisplay;
+    public Text KillsDisplay;
+    private float _elapsedTime = 0;
     private void Start()
     {
-        
+        Time.timeScale = 1;
+    }
+    private void Update()
+    {
+        if (!(_elapsedTime > 1))
+            _elapsedTime += Time.deltaTime;
     }
     private void Kill()
     {
@@ -19,22 +29,30 @@ public class PlayerRespawn : MonoBehaviour {
         {
             this.transform.position = RespawnPoint.transform.position;
             PlayerHealth -= 1;
-            Debug.Log( KillMessage);
-            
-        } 
+            HealthDisplay.text = "Lives: " + PlayerHealth;
+            Debug.Log(KillMessage);
+        }
         else
         {
             Debug.Log(DeadMessage);
             Destroy(this.gameObject);
+            Destroy(HealthDisplay);
+            Destroy(KillsDisplay);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "KillZone")
+        if (_elapsedTime >= 1)
         {
-            Kill();
+            _elapsedTime = 0; //reset it zero again
+            if (other.tag == "KillZone")
+            {
+                Kill();
+            }
         }
-        
+        else {
+            _elapsedTime += Time.deltaTime;
+        }
     }
 }
