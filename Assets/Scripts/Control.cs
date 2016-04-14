@@ -8,6 +8,8 @@ public class Control : MonoBehaviour {
     public float fastFall = 30f;
     public bool jumping = false;
     bool facingRight = true;
+    public GameObject hitBox;
+    private Push direction;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -16,6 +18,8 @@ public class Control : MonoBehaviour {
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        direction = hitBox.GetComponent<Push>();
+
         anim.SetBool("Ground", true);
         anim.SetFloat("Speed", 0f);
         anim.SetBool("Crouch", false);
@@ -41,7 +45,11 @@ public class Control : MonoBehaviour {
         }
         if (Input.GetButton("X_" + playerNum))
         {
-            //Debug.Log("X Pressed");
+            hitBox.SetActive(true);
+        }
+        else if (hitBox.activeSelf)
+        {
+            hitBox.SetActive(false);
         }
         if (Input.GetButton("Y_" + playerNum))
         {
@@ -69,7 +77,6 @@ public class Control : MonoBehaviour {
         }
         if(x == 0)
         {
-            rb.velocity = new Vector2(0, rb.velocity.y);
             anim.SetFloat("Speed", 0);
         }
         if (y > 0.5f /*&& jumping*/)
@@ -87,7 +94,7 @@ public class Control : MonoBehaviour {
     {
         // Switch the way the player is labelled as facing
         facingRight = !facingRight;
-
+        direction.Flip();
         // Multiply the player's x local scale by -1
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;

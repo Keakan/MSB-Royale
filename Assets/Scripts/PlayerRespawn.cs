@@ -5,6 +5,7 @@ using System.Collections;
 public class PlayerRespawn : MonoBehaviour {
 
     public GameObject RespawnPoint;
+    private Rigidbody2D rb;
     public int PlayerHealth;
     public int PlayerNumber;
 
@@ -17,6 +18,7 @@ public class PlayerRespawn : MonoBehaviour {
     {
         Time.timeScale = 1;
         DeathDisplay.transform.position = new Vector3(0, 100, 0);
+        rb = GetComponent<Rigidbody2D>();
     }
     private void Update()
     {
@@ -31,6 +33,7 @@ public class PlayerRespawn : MonoBehaviour {
         if (PlayerHealth > 1)
         {
             this.transform.position = RespawnPoint.transform.position;
+            rb.velocity *= 0;
             PlayerHealth -= 1;
             HealthDisplay.text = "Lives: " + PlayerHealth;
             Debug.Log(KillMessage);
@@ -48,7 +51,7 @@ public class PlayerRespawn : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (_elapsedTime >= 1)
+        if (_elapsedTime >= .01)
         {
             _elapsedTime = 0; //reset it zero again
             if (other.tag == "KillZone")
