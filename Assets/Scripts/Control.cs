@@ -43,14 +43,15 @@ public class Control : MonoBehaviour {
         {
             //Debug.Log("B Pressed");
         }
-        if (Input.GetButton("X_" + playerNum))
+        //push attack, removed because it sucks
+        /*if (Input.GetButton("X_" + playerNum))
         {
             hitBox.SetActive(true);
         }
         else if (hitBox.activeSelf)
         {
             hitBox.SetActive(false);
-        }
+        }*/
         if (Input.GetButton("Y_" + playerNum))
         {
             //Debug.Log("Y Pressed");
@@ -77,6 +78,7 @@ public class Control : MonoBehaviour {
         }
         if(x == 0)
         {
+            rb.velocity = new Vector2(0, rb.velocity.y);
             anim.SetFloat("Speed", 0);
         }
         if (y > 0.5f /*&& jumping*/)
