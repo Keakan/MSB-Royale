@@ -9,7 +9,7 @@ public class PlayerRespawn : MonoBehaviour {
     public int PlayerHealth;
     public int PlayerNumber;
 
-    public Image DeathDisplay;
+    public GameObject DeathDisplay;
     public Text HealthDisplay;
     public Text KillsDisplay;
     private float _elapsedTime = 0;
@@ -17,16 +17,12 @@ public class PlayerRespawn : MonoBehaviour {
     private void Start()
     {
         Time.timeScale = 1;
-<<<<<<< HEAD
 
         DeathDisplay.SetActive(false);
-
-        DeathDisplay.transform.position = new Vector3(0, 100, 0);
+       
         rb = GetComponent<Rigidbody2D>();
+        
 
-=======
-        DeathDisplay.transform.position = new Vector3(0, 100, 0);
->>>>>>> parent of 4efa1ae... finished fixing frizzkull
     }
     private void Update()
     {
@@ -49,8 +45,8 @@ public class PlayerRespawn : MonoBehaviour {
         else
         {
             Debug.Log(DeadMessage);
+            DeathDisplay.SetActive(true);
             Destroy(this.gameObject);
-            DeathDisplay.transform.position = KillsDisplay.transform.position;
             Destroy(HealthDisplay);
             Destroy(KillsDisplay);
            
