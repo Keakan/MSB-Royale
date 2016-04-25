@@ -100,4 +100,37 @@ public class Control : MonoBehaviour {
         theScale.x *= -1;
         transform.localScale = theScale;
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        string playerpickupmessage;
+        if (other.gameObject.tag == "cowItem" || other.gameObject.tag == "holt'sface")
+        {
+            Debug.Log("Picking up item");
+            
+            switch (other.gameObject.tag)
+            {
+
+                case "holt'sface":
+                   playerpickupmessage = playerNum + " picked up a Holt's face!";
+                    Debug.Log(playerpickupmessage);
+                    Destroy(other.gameObject);
+                    break;
+
+                    
+                case "cowItem":
+                    playerpickupmessage = playerNum + " picked up a cow item!";
+                    Debug.Log(playerpickupmessage);
+                    Destroy(other.gameObject);
+                    break;
+
+                    default:
+                    Debug.Log("Help");
+                    break;
+
+
+            }
+        }
+
+    }
 }
