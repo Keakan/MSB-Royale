@@ -35,8 +35,8 @@ public class Control : MonoBehaviour {
 
 	void FixedUpdate()
     {
-        moveSpeed = 20 + (float)(moveSpeed * MOVESPEEDMOD * cowsPickedUp);
-        jumpPower = 35 + (float)(jumpPower * JUMPPOWERMOD * facespickedup);
+        moveSpeed = 20 + (float)(20 * MOVESPEEDMOD * cowsPickedUp);
+        jumpPower = 35 + (float)(35 * JUMPPOWERMOD * facespickedup);
         if (Input.GetButton("A_" + playerNum))
         {
             if (!jumping)
@@ -124,7 +124,7 @@ public class Control : MonoBehaviour {
 
                 case "holt'sface":
                    playerpickupmessage = playerNum + " picked up a Holt's face!";
-                    jumpPower *= (float)1.2;
+                    ++facespickedup;
                     Debug.Log(playerpickupmessage);
                     Destroy(other.gameObject);
                     break;
