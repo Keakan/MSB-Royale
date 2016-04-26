@@ -8,6 +8,7 @@ public class PlayerRespawn : MonoBehaviour {
     private Rigidbody2D rb;
     public int PlayerHealth;
     public int PlayerNumber;
+    public Control cont;
 
     public GameObject DeathDisplay;
     public Text HealthDisplay;
@@ -31,6 +32,8 @@ public class PlayerRespawn : MonoBehaviour {
     {
         string KillMessage = "Player " + PlayerNumber + " Died";
         string DeadMessage = "Player " + PlayerNumber + " Has No More Lives!";
+        cont.cowsPickedUp = 0;
+        cont.facespickedup = 0;
     
         if (PlayerHealth > 1)
         {

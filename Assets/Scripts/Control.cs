@@ -10,6 +10,11 @@ public class Control : MonoBehaviour {
     bool facingRight = true;
     public GameObject hitBox;
     private Push direction;
+    private int powerUpTimer = 0;
+    public double cowsPickedUp = 0;
+    public double facespickedup = 0;
+    private const double MOVESPEEDMOD = .1;
+    private const double JUMPPOWERMOD = .1;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -38,6 +43,8 @@ public class Control : MonoBehaviour {
 
 void FixedUpdate()
     {
+        moveSpeed = 20 + (float)(20 * MOVESPEEDMOD * cowsPickedUp);
+        jumpPower = 35 + (float)(35 * JUMPPOWERMOD * facespickedup);
         if (Input.GetButton("A_" + playerNum))
         {
             if (!jumping)
@@ -128,5 +135,42 @@ void FixedUpdate()
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+   
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        string playerpickupmessage;
+        if (other.gameObject.tag == "cowItem" || other.gameObject.tag == "holt'sface")
+        {
+            Debug.Log("Picking up item");
+            
+            switch (other.gameObject.tag)
+            {
+
+                case "holt'sface":
+                   playerpickupmessage = playerNum + " picked up a Holt's face!";
+                    ++facespickedup;
+                    Debug.Log(playerpickupmessage);
+                    Destroy(other.gameObject);
+                    break;
+
+                    
+                case "cowItem":
+                    playerpickupmessage = playerNum + " picked up a cow item!";
+                    ++cowsPickedUp;
+                    Debug.Log(playerpickupmessage);
+                    Destroy(other.gameObject);
+                    break;
+
+                    default:
+                    Debug.Log("Help");
+                    break;
+
+
+            }
+        }
+
     }
 }
