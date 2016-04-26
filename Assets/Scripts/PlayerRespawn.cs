@@ -21,8 +21,6 @@ public class PlayerRespawn : MonoBehaviour {
         DeathDisplay.SetActive(false);
        
         rb = GetComponent<Rigidbody2D>();
-        
-
     }
     private void Update()
     {
@@ -33,7 +31,7 @@ public class PlayerRespawn : MonoBehaviour {
     {
         string KillMessage = "Player " + PlayerNumber + " Died";
         string DeadMessage = "Player " + PlayerNumber + " Has No More Lives!";
-
+    
         if (PlayerHealth > 1)
         {
             this.transform.position = RespawnPoint.transform.position;
@@ -60,6 +58,11 @@ public class PlayerRespawn : MonoBehaviour {
             _elapsedTime = 0; //reset it zero again
             if (other.tag == "KillZone")
             {
+                Kill();
+            }
+            if (other.tag == "Bullet")
+            {
+                Destroy(other.gameObject);
                 Kill();
             }
         }
