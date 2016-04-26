@@ -28,7 +28,7 @@ public class ItemSpawning : MonoBehaviour {
         
 
 
-        if (timer > Random.Range(100, 701))
+        if (timer > Random.Range(600, 701))
         {
             if(isThereAnItem == false)
             {
