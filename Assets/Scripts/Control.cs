@@ -57,7 +57,7 @@ void FixedUpdate()
         }
         if (Input.GetButton("B_" + playerNum))
         {
-            //Debug.Log("B Pressed");
+            //Debug.Log("B Pressed by Player " + playerNum);
         }
         //push attack, removed because it sucks
         if (Input.GetButton("X_" + playerNum) && Time.time >= cooldown)

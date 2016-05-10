@@ -9,7 +9,7 @@ public class LoadScene : MonoBehaviour {
     }
     public void LoadLevel(int l)
     {
-        SceneManager.LoadScene(l);
+        SceneManager.LoadScene(1);
     }
 
     public void Exit()
