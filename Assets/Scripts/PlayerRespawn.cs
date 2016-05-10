@@ -63,7 +63,7 @@ public class PlayerRespawn : MonoBehaviour {
             {
                 Kill();
             }
-            if (other.tag == "Bullet")
+            if (other.tag != "BulletP" + PlayerNumber)
             {
                 Destroy(other.gameObject);
                 Kill();

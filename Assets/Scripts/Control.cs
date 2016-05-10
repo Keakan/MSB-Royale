@@ -43,6 +43,7 @@ public class Control : MonoBehaviour {
 
 void FixedUpdate()
     {
+        bs = new Vector2(transform.position.x + 1, transform.position.y);
         moveSpeed = 20 + (float)(20 * MOVESPEEDMOD * cowsPickedUp);
         jumpPower = 35 + (float)(35 * JUMPPOWERMOD * facespickedup);
         if (Input.GetButton("A_" + playerNum))
@@ -62,13 +63,11 @@ void FixedUpdate()
         if (Input.GetButton("X_" + playerNum) && Time.time >= cooldown)
         {
             //hitBox.SetActive(true);
-            /*
+            
             GameObject bPrefab = Instantiate(bulletPrefab, bs, Quaternion.identity) as GameObject;
+            bPrefab.tag = "Bullet" + playerNum;
             bPrefab.GetComponent<Rigidbody2D>().AddForce(weaponD * 3000f);
-            cooldown = Time.time + attackSpeed;
-            Debug.Log(weaponD);
-            Debug.Log(bs);
-            */
+            cooldown = Time.time + attackSpeed;            
 
             //else if (hitBox.activeSelf)
             //{
@@ -123,12 +122,10 @@ void FixedUpdate()
         if (facingRight == true)
         {
             weaponD = Vector2.right;
-            bs = new Vector2(transform.position.x + 1, transform.position.y);
         }
         else
         {
             weaponD = Vector2.left;
-            bs = new Vector2(transform.position.x - 1, transform.position.y);
         }
         direction.Flip();
         // Multiply the player's x local scale by -1
@@ -167,8 +164,6 @@ void FixedUpdate()
                     default:
                     Debug.Log("Help");
                     break;
-
-
             }
         }
 
